@@ -11,7 +11,6 @@ var ez = ReadEx();
 foreach (var item in cash)
 {
     JObject o = JObject.Parse(item.Data);
-    Console.WriteLine(o["con"]);
 } 
 
 Console.WriteLine("P");

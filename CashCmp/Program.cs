@@ -6,22 +6,33 @@ using System.Globalization;
 
 var cash = ReadCash();
 var tr = ReadTr();
+var ez = ReadEx();
 
 foreach (var item in cash)
 {
     JObject o = JObject.Parse(item.Data);
     Console.WriteLine(o["con"]);
-}
+} 
 
 Console.WriteLine("P");
 Console.Read();
 
 static List<Tr> ReadTr() 
 {
-    using (var reader = new StreamReader(@"D:\c3\dialogkiosk6\test\CashCmpF\tr.csv"))
+    using (var reader = new StreamReader(@"D:\c3\dialogkiosk6\test\CashCmpF\bill.csv"))
     using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
     {
         var records = csv.GetRecords<Tr>().ToList();
+        return records;
+    }
+}
+
+static List<Ez> ReadEx()
+{
+    using (var reader = new StreamReader(@"D:\c3\dialogkiosk6\test\CashCmpF\ez.csv"))
+    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+    {
+        var records = csv.GetRecords<Ez>().ToList();
         return records;
     }
 }
@@ -50,6 +61,16 @@ public class Tr
     public string Account { get; set; }
     public string LOB { get; set; }
     public string Amount { get; set; }
+
+}
+
+public class Ez
+{
+    public string Date { get; set; }
+    public string Account { get; set; }
+    public string Amount { get; set; }
+    public string Type { get; set; }
+    public string EZCashRefId { get; set; }
 
 }
 
